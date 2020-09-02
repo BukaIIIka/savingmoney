@@ -1,0 +1,124 @@
+html, body {
+  background-color: #F1F2F5;
+}
+
+button.button-primary {
+  background-color: #abbed2;
+  color: #2c3e50;
+  border: none;
+  line-height: 1;
+  border-radius: 5px;
+  padding: 5px 10px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+button.btn-neumorphism {
+  border: none;
+  //margin-left: auto;
+}
+
+a.btn-neumorphism {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.btn-neumorphism {
+  display: block;
+  background: linear-gradient(180deg, #FCF0FF, transparent);
+  color: #2c3e50;
+  box-shadow: 3px 3px 8px rgba(199, 199, 199, .6),
+              -3px -3px 8px white,
+              inset 0 0 0 rgba(103, 103, 103, .4),
+              inset 0 0 0 rgba(255, 255, 255, .5);
+  transition: 0.4s;
+  font-weight: bold;
+  outline: none;
+  //border: 1px solid rgba(255, 255, 255, 0.2);
+
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    box-shadow: 0 0 0 rgba(199, 199, 199, .6),
+                0 0 0 white,
+                inset 3px 3px 8px rgba(199, 199, 199, .6),
+                inset -3px -3px 8px white;
+    color: #255d94;
+  }
+
+  &.rounded {
+    border-radius: 50%;
+    padding: 10px;
+    line-height: 0.5;
+    font-weight: bold;
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, #DFE6FF, transparent);
+}
+
+.form {
+  display: flex;
+  padding: 15px 20px;
+  margin-top: 10px;
+  flex-direction: column;
+  box-shadow: 0 0 5px 0 #97a6b7;
+  border-radius: 15px;
+  background-color: white;
+
+  label {
+    margin: 10px 0;
+
+    input {
+      display: block;
+      width: 80%;
+      margin-top: 10px;
+      margin-left: auto;
+      margin-right: auto;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: 1px solid #abbed2;
+      text-align: center;
+      line-height: 2;
+      &:focus {
+        outline: none;
+        border-color: #2c3e50;
+      }
+    }
+  }
+
+  .error {
+    input {
+      border-color: #c13f3f !important;
+    }
+
+    .error-text {
+      color: #c13f3f;
+      font-size: .75em;
+    }
+  }
+
+  .close-modal-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 15px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .button-primary {
+    display: block;
+  }
+}
