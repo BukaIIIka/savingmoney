@@ -28,7 +28,7 @@ a.btn-neumorphism {
 
 .btn-neumorphism {
   display: block;
-  background: linear-gradient(180deg, #FCF0FF, transparent);
+  background: linear-gradient(135deg, #FAFAFA, transparent);
   color: #2c3e50;
   box-shadow: 3px 3px 8px rgba(199, 199, 199, .6),
               -3px -3px 8px white,
@@ -63,7 +63,8 @@ a.btn-neumorphism {
 }
 
 .btn-primary {
-  background: linear-gradient(180deg, #DFE6FF, transparent);
+  background: linear-gradient(180deg, #e3f1ff, transparent);
+  //background: linear-gradient(180deg, #DFE6FF, transparent);
 }
 
 .form {
