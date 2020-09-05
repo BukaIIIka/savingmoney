@@ -16,7 +16,7 @@ import changeGoalParams from "@/components/changeGoalParams";
 Vue.use(VueRouter)
 Vue.use(Vuex)
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 const routes = [
   { path: '/goal/create', component: createGoal },
@@ -30,7 +30,7 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
-  base: Vue.publicPath,
+  base: '/savingmoney/',
   routes
 })
 
