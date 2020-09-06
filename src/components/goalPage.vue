@@ -13,19 +13,24 @@
 
         <h1>{{goalParams.name}}</h1>
         <div v-if="+goalParams.currentAmount < +goalParams.amount || !goalParams.amount">
-            <h3>Накоплено</h3>
+            <h4>Вы накопили</h4>
             <section class="amount-container">
                 <span class="current-amount">{{goalParams.currentAmount}}</span>
                 <span v-if="goalParams.amount" class="amount">/{{goalParams.amount}}</span>
                 <button class="btn-neumorphism rounded btn-primary btn-add-coins" @click="isNeedToAddCoins = !isNeedToAddCoins">+</button>
+                <div>
+                    <progress v-if="goalParams.amount" :max="goalParams.amount" :value="goalParams.currentAmount"></progress>
+                </div>
             </section>
             <div v-if="!goalParams.isInfinityDate" v-countdown-date:date="goalParams.targetDate"></div>
-            <div v-else>Бессрочная цель</div>
+            <p v-else>Бессрочная цель</p>
         </div>
         <div v-else>
-            <h3>Цель выполнена</h3>
+            <h4>Цель выполнена</h4>
             <span>Молодец, вы собрали {{goalParams.amount}}!</span>
         </div>
+
+        <div v-if="goalParams.createDate">Цель создана: <span v-countdown-date:date="goalParams.createDate"></span></div>
 
         <section class="form" :class="{ 'hidden': !isNeedToAddCoins}">
             <label> <input type="number" min="0" :max="goalParams.amount ? goalParams.amount - goalParams.currentAmount : ''"  v-model="newAmount"> </label>
@@ -55,7 +60,8 @@
                 this.$store.dispatch('incrementGoalAmountAndSave', {
                     id: this.$route.params.id,
                     amount: this.newAmount
-                })
+                });
+                this.isNeedToAddCoins = false;
             },
             deleteGoal: function () {
                 if (window.confirm('Вы уверенны?')) {

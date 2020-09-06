@@ -6,7 +6,8 @@
             <template v-else-if="goalItem.currentAmount < goalItem.amount">{{goalItem.amount - goalItem.currentAmount}}</template>
             <template v-else>✓</template>
         </div>
-        <div v-if="!goalItem.isInfinityDate" class="date">{{date}}</div>
+        <progress v-if="goalItem.amount" :max="goalItem.amount" :value="goalItem.currentAmount"></progress>
+        <div v-if="!goalItem.isInfinityDate" class="date" v-countdown-date:date="goalItem.targetDate"></div>
     </router-link>
 </template>
 
@@ -40,6 +41,10 @@
         .date {
             font-size: 12px;
             font-weight: 100;
+        }
+
+        progress {
+            width: 100%;
         }
     }
 </style>

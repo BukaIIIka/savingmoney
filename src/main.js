@@ -38,20 +38,10 @@ const store = new Vuex.Store(Store)
 
 Vue.directive('countdown-date', {
   bind: function (el, binding) {
-    // let s = JSON.stringify
     let date = new Date(binding.value);
-    let dateNow = new Date(Date.now());
-    dateNow.setHours(0);
-    let diffDate = date - dateNow;
 
-    let text = 'date: '+ dateNow + ' = ' + date;
-    if (diffDate > 0) {
-      let days = Math.floor(diffDate / (24 * 3600 * 1000));
-      text = "Осталось более " + days + ' дней';
-    } else {
-      text = "Время вышло";
-    }
-    el.innerHTML = text;
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    el.innerHTML = date.toLocaleDateString("ru-Ru", options);
   }
 })
 

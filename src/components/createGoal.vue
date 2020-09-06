@@ -1,14 +1,20 @@
 <template>
     <section class="form">
         <h2>Создание цели</h2>
-        <label :class="{'error': emptyField}">
-            <span>Название цели</span>
-            <input type="text" v-model.trim="newGoalParams.name" ref="requiredName" placeholder="Новая машина">
+        <div class="form-input" :class="{'error': emptyField}">
+            <input id="name" type="text" v-model.trim="newGoalParams.name" ref="requiredName" :class="{'filled': newGoalParams.name}">
+            <label for="name">Название цели</label>
             <span v-if="emptyField" class="error-text">Укажите название цели</span>
-        </label>
-        <label>Сумма накоплений <input type="number" v-model.number="newGoalParams.amount" placeholder="200"></label>
-        <label>Срок до накопления <input v-model="newGoalParams.date" type="datetime-local"></label>
-        <button @click="createNewGoal()" class="button-primary btn-neumorphism">Создать</button>
+        </div>
+        <div class="form-input">
+            <input id="amount" type="number" v-model.number="newGoalParams.amount" :class="{'filled': newGoalParams.amount}">
+            <label for="amount">Сумма накоплений</label>
+        </div>
+        <div class="form-input">
+            <input id="date" v-model="newGoalParams.date" type="date" :class="{'filled': newGoalParams.date}">
+            <label for="date">Дата выполнения цели</label>
+        </div>
+        <button @click="createNewGoal()" class="btn-neumorphism btn-primary">Создать</button>
     </section>
 </template>
 
@@ -39,7 +45,8 @@
                         amount: +this.newGoalParams.amount,
                         currentAmount: 0,
                         targetDate: new Date(this.newGoalParams.date),
-                        isInfinityDate: !this.newGoalParams.date
+                        isInfinityDate: !this.newGoalParams.date,
+                        createDate: Date.now()
                     });
                     localStorage.goalListLenght = ++this.goalListLenght;
                     this.$router.push('/');

@@ -1,6 +1,5 @@
 <template>
     <div>
-<!--        <h1>Накопитель желаний</h1>-->
         <h3 v-if="goalList.length === 0">Список пока пуст. Создайте свою первую цель.</h3>
         <div class="goal-list">
             <template v-for="(goal, index) in goalList">
@@ -45,10 +44,6 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
-        max-width: 800px;
-        margin: auto;
-        padding-left: 10px;
-        padding-right: 10px;
     }
 
     .goal-item {

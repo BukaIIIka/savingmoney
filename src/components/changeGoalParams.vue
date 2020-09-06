@@ -1,13 +1,22 @@
 <template>
     <section class="form">
-        <label :class="{'error': emptyField}">
-            <span>Название цели</span>
-            <input type="text" v-model="goalParams.name" ref="requiredName" placeholder="Новая машина">
+        <div class="form-input" :class="{'error': emptyField}">
+            <input id="name" type="text" v-model="goalParams.name" ref="requiredName" :class="{'filled': goalParams.name}">
+            <label for="name">Название цели</label>
             <span v-if="emptyField" class="error-text">Укажите название цели</span>
-        </label>
-        <label>Сумма накоплений <input type="number" v-model="goalParams.amount" placeholder="200"></label>
-        <label>Накопленная сумма <input type="number" v-model="goalParams.currentAmount"></label>
-        <label>Срок до накопления <input v-model="goalParams.date" type="datetime-local"></label>
+        </div>
+        <div class="form-input">
+            <input id="amount" type="number" v-model="goalParams.amount" :class="{'filled': goalParams.amount}">
+            <label for="amount">Сумма накоплений</label>
+        </div>
+        <div class="form-input">
+            <input id="currentAmount" type="number" v-model="goalParams.currentAmount" :class="{'filled': goalParams.currentAmount > 0 }">
+            <label for="currentAmount">Накопленная сумма</label>
+        </div>
+        <div class="form-input">
+            <input id="date" v-model="goalParams.date" type="date" :class="{'filled': goalParams.date}">
+            <label for="date">Дата выполнения цели</label>
+        </div>
         <button @click="changeGoalParams()" class="button-primary btn-neumorphism">Сохранить</button>
     </section>
 </template>
