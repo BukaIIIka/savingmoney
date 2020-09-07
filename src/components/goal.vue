@@ -6,17 +6,22 @@
             <template v-else-if="goalItem.currentAmount < goalItem.amount">{{goalItem.amount - goalItem.currentAmount}}</template>
             <template v-else>✓</template>
         </div>
-        <progress v-if="goalItem.amount" :max="goalItem.amount" :value="goalItem.currentAmount"></progress>
+        <progress-bar v-if="goalItem.amount" :max="goalItem.amount" :value="goalItem.currentAmount"></progress-bar>
         <div v-if="!goalItem.isInfinityDate" class="date" v-countdown-date:date="goalItem.targetDate"></div>
     </router-link>
 </template>
 
 <script>
-    // import Goal from "@/scripts/goal";
+    import progressBar from "@/components/progressBar";
+
     export default {
+
         name: "goal",
         props: {
             goalItem: Object
+        },
+        components: {
+            progressBar
         },
         computed: {
             date: function () {

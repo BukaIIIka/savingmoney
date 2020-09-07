@@ -14,14 +14,21 @@
             <label for="currentAmount">Накопленная сумма</label>
         </div>
         <div class="form-input">
-            <input id="date" v-model="goalParams.date" type="date" :class="{'filled': goalParams.date}">
+            <date-picker v-model="goalParams.targetDate" valueType="format" format="YYYY-MM-DD" :class="{'filled': goalParams.targetDate}" :inputAttr="{
+                id: 'date',
+                class: {'filled': goalParams.targetDate}
+            }"></date-picker>
             <label for="date">Дата выполнения цели</label>
         </div>
-        <button @click="changeGoalParams()" class="button-primary btn-neumorphism">Сохранить</button>
+        <button @click="changeGoalParams()" class="btn-primary btn-neumorphism">Сохранить</button>
     </section>
 </template>
 
 <script>
+    import DatePicker from 'vue2-datepicker';
+    import 'vue2-datepicker/index.css';
+    import 'vue2-datepicker/locale/ru';
+
     export default {
         name: "createGoal",
         data: function () {
@@ -29,6 +36,9 @@
                 goalParams: Object,
                 emptyField: Boolean
             }
+        },
+        components: {
+            DatePicker,
         },
         created() {
             this.emptyField = false;
@@ -48,8 +58,8 @@
                         name: this.goalParams.name,
                         amount: +this.goalParams.amount,
                         currentAmount: +this.goalParams.currentAmount,
-                        targetDate: new Date(this.goalParams.date),
-                        isInfinityDate: !this.goalParams.date
+                        targetDate: new Date(this.goalParams.targetDate),
+                        isInfinityDate: !this.goalParams.targetDate
                     });
                     this.$router.push(`/goal/${this.goalParams.id}`);
                 }

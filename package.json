@@ -13,6 +13,7 @@
     "travis": "^0.1.1",
     "vue": "^2.6.11",
     "vue-router": "^3.3.4",
+    "vue2-datepicker": "^3.6.2",
     "vuex": "^3.5.1"
   },
   "devDependencies": {

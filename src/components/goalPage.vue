@@ -12,34 +12,37 @@
 
 
         <h1>{{goalParams.name}}</h1>
-        <div v-if="+goalParams.currentAmount < +goalParams.amount || !goalParams.amount">
-            <h4>Вы накопили</h4>
+        <div v-if="+goalParams.currentAmount < +goalParams.amount || !goalParams.amount" class="container">
             <section class="amount-container">
-                <span class="current-amount">{{goalParams.currentAmount}}</span>
-                <span v-if="goalParams.amount" class="amount">/{{goalParams.amount}}</span>
-                <button class="btn-neumorphism rounded btn-primary btn-add-coins" @click="isNeedToAddCoins = !isNeedToAddCoins">+</button>
-                <div>
-                    <progress v-if="goalParams.amount" :max="goalParams.amount" :value="goalParams.currentAmount"></progress>
+                <div class="current-amount">
+                    <span>{{ goalParams.currentAmount }}</span>
+                    <button class="btn-neumorphism rounded btn-primary btn-add-coins" @click="openAddAmountForm()">+</button>
                 </div>
+                <span v-if="goalParams.amount" class="amount"> из {{goalParams.amount}}</span>
+                <progress-bar v-if="goalParams.amount" :max="goalParams.amount" :value="goalParams.currentAmount"></progress-bar>
             </section>
-            <div v-if="!goalParams.isInfinityDate" v-countdown-date:date="goalParams.targetDate"></div>
+
+            <section class="form" :class="{ 'hidden': !isNeedToAddCoins}">
+                <div class="form-input">
+                    <input type="number" ref="increasedAmount" class="filled" min="0" :max="goalParams.amount ? goalParams.amount - goalParams.currentAmount : ''"  v-model="newAmount">
+                </div>
+                <button class="btn-primary btn-neumorphism" @click="addCurrentAmount()">Пополнить цель</button>
+            </section>
+            <div v-if="!goalParams.isInfinityDate" v-countdown-date:date="goalParams.targetDate" class="text-secondary"></div>
             <p v-else>Бессрочная цель</p>
         </div>
-        <div v-else>
+        <div v-else class="container">
             <h4>Цель выполнена</h4>
             <span>Молодец, вы собрали {{goalParams.amount}}!</span>
         </div>
 
-        <div v-if="goalParams.createDate">Цель создана: <span v-countdown-date:date="goalParams.createDate"></span></div>
-
-        <section class="form" :class="{ 'hidden': !isNeedToAddCoins}">
-            <label> <input type="number" min="0" :max="goalParams.amount ? goalParams.amount - goalParams.currentAmount : ''"  v-model="newAmount"> </label>
-            <button class="button-primary btn-neumorphism" @click="addCurrentAmount()">Подкопить</button>
-        </section>
+        <div v-if="goalParams.createDate" class="text-secondary container">Цель создана: <span v-countdown-date:date="goalParams.createDate"></span></div>
     </div>
 </template>
 
 <script>
+    import progressBar from "@/components/progressBar";
+
     export default {
         name: "goalPage",
         data: function () {
@@ -48,6 +51,9 @@
                 isDropdownOpen: false,
                 isNeedToAddCoins: false
             }
+        },
+        components: {
+            progressBar
         },
         created() {
             console.log(this.goalParams);
@@ -72,7 +78,14 @@
                         console.log(e.message);
                     }
                 }
-            }
+            },
+            openAddAmountForm: function () {
+                this.isNeedToAddCoins = !this.isNeedToAddCoins;
+                this.$nextTick(() => {
+                    this.$refs.increasedAmount.value = 0;
+                    this.$refs.increasedAmount.focus();
+                });
+            },
         },
         computed: {
             goalParams() {
@@ -111,6 +124,9 @@
         margin-bottom: 15px;
 
         .current-amount {
+            display: flex;
+            align-items: center;
+            font-size: xx-large;
             font-weight: bold;
         }
 
@@ -125,4 +141,14 @@
         }
     }
 
+    .progress {
+        margin-top: 10px;
+    }
+
+    .container {
+        background-color: #FAFAFA;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
 </style>

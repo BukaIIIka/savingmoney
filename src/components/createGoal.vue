@@ -11,7 +11,10 @@
             <label for="amount">Сумма накоплений</label>
         </div>
         <div class="form-input">
-            <input id="date" v-model="newGoalParams.date" type="date" :class="{'filled': newGoalParams.date}">
+            <date-picker v-model="newGoalParams.targetDate" valueType="format" format="YYYY-MM-DD" :inputAttr="{
+                id: 'date',
+                class: {'filled': newGoalParams.targetDate}
+            }"></date-picker>
             <label for="date">Дата выполнения цели</label>
         </div>
         <button @click="createNewGoal()" class="btn-neumorphism btn-primary">Создать</button>
@@ -19,6 +22,10 @@
 </template>
 
 <script>
+    import DatePicker from 'vue2-datepicker';
+    import 'vue2-datepicker/index.css';
+    import 'vue2-datepicker/locale/ru';
+
     export default {
         name: "createGoal",
         data: function () {
@@ -27,6 +34,9 @@
                 goalListLenght: Number,
                 emptyField: Boolean
             }
+        },
+        components: {
+            DatePicker,
         },
         created() {
             this.emptyField = false;
@@ -44,8 +54,8 @@
                         name: this.newGoalParams.name,
                         amount: +this.newGoalParams.amount,
                         currentAmount: 0,
-                        targetDate: new Date(this.newGoalParams.date),
-                        isInfinityDate: !this.newGoalParams.date,
+                        targetDate: new Date(this.newGoalParams.targetDate),
+                        isInfinityDate: !this.newGoalParams.targetDate,
                         createDate: Date.now()
                     });
                     localStorage.goalListLenght = ++this.goalListLenght;

@@ -43,7 +43,9 @@ export default {
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-right: 50px;
             margin-bottom: 20px;
+            margin-left: 50px;
 
             .logo {
                 height: 60px;

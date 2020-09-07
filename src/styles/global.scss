@@ -2,21 +2,13 @@ html, body {
   background-color: #F1F2F5;
 }
 
-button.button-primary {
-  background-color: #abbed2;
-  color: #2c3e50;
-  border: none;
-  line-height: 1;
-  border-radius: 5px;
-  padding: 5px 10px;
-  &:hover {
-    cursor: pointer;
-  }
+.form .mx-datepicker {
+  display: block;
+  width: auto;
 }
 
 button.btn-neumorphism {
   border: none;
-  //margin-left: auto;
 }
 
 a.btn-neumorphism {
@@ -117,7 +109,8 @@ a.btn-neumorphism {
     }
 
     input:focus ~ label,
-    input.filled ~ label {
+    input.filled ~ label,
+    .mx-datepicker.filled ~ label {
       top: calc(100% + 5px);
       font-size: .8em;
     }
@@ -140,4 +133,10 @@ a.btn-neumorphism {
     margin-bottom: 15px;
     line-height: 1.5rem;
   }
+}
+
+.text-secondary {
+  color: #7f8b98;
+  font-size: 0.8em;
+  font-weight: 100;
 }
