@@ -8,14 +8,17 @@
         </div>
         <div class="form-input">
             <input id="amount" type="number" v-model.number="newGoalParams.amount" :class="{'filled': newGoalParams.amount}">
-            <label for="amount">Сумма накоплений</label>
+            <label for="amount">Желаемая сумма</label>
         </div>
         <div class="form-input">
-            <date-picker v-model="newGoalParams.targetDate" valueType="format" format="YYYY-MM-DD" :inputAttr="{
-                id: 'date',
-                class: {'filled': newGoalParams.targetDate}
-            }"></date-picker>
-            <label for="date">Дата выполнения цели</label>
+            <date-picker v-model="newGoalParams.targetDate" valueType="format" format="YYYY-MM-DD"
+                         @focus="dateFieldIsFocused = true" @blur="dateFieldIsFocused = false"
+                         :inputAttr="{
+                            id: 'date',
+                            class: {'filled': newGoalParams.targetDate}
+                        }">
+            </date-picker>
+            <label :class="{'filled': newGoalParams.targetDate, 'focused': dateFieldIsFocused }" for="date">Дата выполнения цели</label>
         </div>
         <button @click="createNewGoal()" class="btn-neumorphism btn-primary">Создать</button>
     </section>
@@ -32,7 +35,8 @@
             return {
                 newGoalParams: Object,
                 goalListLenght: Number,
-                emptyField: Boolean
+                emptyField: Boolean,
+                dateFieldIsFocused: Boolean
             }
         },
         components: {
@@ -42,6 +46,7 @@
             this.emptyField = false;
             this.newGoalParams = {};
             this.goalListLenght = +localStorage.goalListLenght || this.$store.state.goalList.length;
+            this.dateFieldIsFocused = false;
         },
         methods: {
             createNewGoal: function () {

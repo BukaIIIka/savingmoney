@@ -25,6 +25,10 @@
             <section class="form" :class="{ 'hidden': !isNeedToAddCoins}">
                 <div class="form-input">
                     <input type="number" ref="increasedAmount" class="filled" min="0" :max="goalParams.amount ? goalParams.amount - goalParams.currentAmount : ''"  v-model="newAmount">
+
+                    <span class="btn-pill" @click="incrementAmount(10)">+10</span>
+                    <span class="btn-pill" @click="incrementAmount(50)">+50</span>
+                    <span class="btn-pill" @click="incrementAmount(100)">+100</span>
                 </div>
                 <button class="btn-primary btn-neumorphism" @click="addCurrentAmount()">Пополнить цель</button>
             </section>
@@ -68,6 +72,9 @@
                     amount: this.newAmount
                 });
                 this.isNeedToAddCoins = false;
+            },
+            incrementAmount: function(value) {
+                this.newAmount += value;
             },
             deleteGoal: function () {
                 if (window.confirm('Вы уверенны?')) {

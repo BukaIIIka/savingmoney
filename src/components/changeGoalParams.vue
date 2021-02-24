@@ -14,11 +14,14 @@
             <label for="currentAmount">Накопленная сумма</label>
         </div>
         <div class="form-input">
-            <date-picker v-model="goalParams.targetDate" valueType="format" format="YYYY-MM-DD" :class="{'filled': goalParams.targetDate}" :inputAttr="{
-                id: 'date',
-                class: {'filled': goalParams.targetDate}
-            }"></date-picker>
-            <label for="date">Дата выполнения цели</label>
+            <date-picker v-model="goalParams.targetDate" valueType="format" format="YYYY-MM-DD"
+                         @focus="dateFieldIsFocused = true" @blur="dateFieldIsFocused = false"
+                         :inputAttr="{
+                            id: 'date',
+                            class: {'filled': goalParams.targetDate}
+                        }">
+            </date-picker>
+            <label :class="{'filled': goalParams.targetDate, 'focused': dateFieldIsFocused }" for="date">Дата выполнения цели</label>
         </div>
         <button @click="changeGoalParams()" class="btn-primary btn-neumorphism">Сохранить</button>
     </section>
@@ -34,7 +37,8 @@
         data: function () {
             return {
                 goalParams: Object,
-                emptyField: Boolean
+                emptyField: Boolean,
+                dateFieldIsFocused: Boolean
             }
         },
         components: {
@@ -46,6 +50,7 @@
             if (this.goalParams === undefined) {
                 this.$router.push('/404')
             }
+            this.dateFieldIsFocused = false;
         },
         methods: {
             changeGoalParams: function () {

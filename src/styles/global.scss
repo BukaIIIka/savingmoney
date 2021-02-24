@@ -51,19 +51,29 @@ a.btn-neumorphism {
 .hidden {
   display: none !important;
 }
+.btn-pill {
+  display: inline-block;
+  margin-right: 5px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 1em;
+  background-color: #a2ccb54d;
+  font-size: small;
+}
 
 .btn-primary {
-  background: linear-gradient(135deg, #e3f1ff, transparent);
+  background: linear-gradient(135deg, #a2ccb54d, transparent);
   box-shadow: 3px 3px 8px rgba(199, 199, 199, .6),
-              -3px -3px 8px #e3f1ff,
+              -3px -3px 8px #a2ccb54d,
               inset 0 0 0 rgba(103, 103, 103, .4),
               inset 0 0 0 rgba(255, 255, 255, .5);
   &:hover,
   &:focus {
     box-shadow: 0 0 0 rgba(199, 199, 199, .6),
-                0 0 0 #e3f1ff,
+                0 0 0 #a2ccb54d,
                 inset 3px 3px 8px rgba(199, 199, 199, .6),
-                inset -3px -3px 8px #e3f1ff;
+                inset -3px -3px 8px #a2ccb54d;
   }
 }
 
@@ -109,8 +119,9 @@ a.btn-neumorphism {
     }
 
     input:focus ~ label,
+    label.focused,
     input.filled ~ label,
-    .mx-datepicker.filled ~ label {
+    label.filled {
       top: calc(100% + 5px);
       font-size: .8em;
     }
@@ -131,7 +142,7 @@ a.btn-neumorphism {
     display: block;
     margin-top: 15px;
     margin-bottom: 15px;
-    line-height: 1.5rem;
+    line-height: 2rem;
   }
 }
 
