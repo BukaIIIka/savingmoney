@@ -71,10 +71,11 @@
                     id: this.$route.params.id,
                     amount: this.newAmount
                 });
+                this.newAmount = 0;
                 this.isNeedToAddCoins = false;
             },
             incrementAmount: function(value) {
-                this.newAmount += value;
+                this.newAmount = +this.newAmount + +value;
             },
             deleteGoal: function () {
                 if (window.confirm('Вы уверенны?')) {
